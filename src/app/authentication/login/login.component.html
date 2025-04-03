@@ -1,1 +1,27 @@
-<p>login works!</p>
+<section class="container">
+    <div class="card ">
+      <div class="card-header text-center"> Registration </div>
+     <div class="card-body">
+          <form class="row g-3" [formGroup]="loginForm" (ngSubmit) = "onSubmit()">
+              <div class="col-md-12">
+                <label for="inputEmail4" class="form-label">Email</label>
+                <input type="email" formControlName="email" class="form-control" id="inputEmail4">
+                <span class="text-danger" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                  email is required 
+                </span>
+              </div>
+              <div class="col-md-12">
+                <label for="inputPassword4" class="form-label">Password</label>
+                <input type="password" formControlName="password" class="form-control" id="inputPassword4">
+                <span class="text-danger" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                  password is required 
+                </span>
+              </div>
+              <div class="col-12 text-center">
+                <button type="button" class="btn btn-primary register-button" (click)="navigateRegister()">Register</button>
+                <button type="submit" class="btn btn-primary register-button" >Login</button>
+              </div>
+            </form>
+      </div>
+    </div>
+</section>

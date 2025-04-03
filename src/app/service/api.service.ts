@@ -22,4 +22,8 @@ export class ApiService {
     return this.http.post(`${this.apiUrl}/signup`,userData)
   }
 
+  userLogin(userData:User):Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`,userData)
+  }
+
 }

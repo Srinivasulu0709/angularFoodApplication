@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../../service/api.service';
+import { User } from '../../interface/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -15,7 +17,7 @@ export class RegistrationComponent implements OnInit  {
   submitted:boolean = false;
   message:string = '';
 
-  constructor(private fb:FormBuilder,private apiservice:ApiService) {}
+  constructor(private fb:FormBuilder,private apiservice:ApiService,private router:Router) {}
 
   ngOnInit() {
     this.registrationForm = this.fb.group({
@@ -39,10 +41,17 @@ export class RegistrationComponent implements OnInit  {
     return password === passwordConfirm ? null : { mismatch: true };
   }
 
+  navigateLogin() {
+    this.router.navigate(['/login']);
+  }
+
   onSubmit() {
     this.submitted = true;
     if(this.registrationForm.valid) {
-      this.apiservice.createData(this.registrationForm.value).subscribe(res => {
+
+      const userData:User = this.registrationForm.value;
+      
+      this.apiservice.createData(userData).subscribe(res => {
         console.log("Response from API:", res);
         this.message = res.data 
       },

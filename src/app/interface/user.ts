@@ -1,6 +1,6 @@
 export interface User {
-    username:String,
+    username?:String,
     email:String,
     password:String,
-    passwordConfirm:string
+    passwordConfirm?:string
 }
