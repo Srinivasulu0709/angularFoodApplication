@@ -1,0 +1,13 @@
+.container {
+    position: relative;
+}
+.card {
+    width: 25rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 28%);
+}
+.register-button {
+    width: 23rem;
+}
