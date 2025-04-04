@@ -38,6 +38,7 @@
                   <button type="submit" class="btn btn-primary register-button">Register</button>
                   <button type="button" class="btn btn-primary register-button" (click)="navigateLogin()">Login</button>
                 </div>
+                <div *ngIf="message" class="alert alert-danger">{{message}}</div>
               </form>
         </div>
       </div>

@@ -50,17 +50,21 @@ export class RegistrationComponent implements OnInit  {
     if(this.registrationForm.valid) {
 
       const userData:User = this.registrationForm.value;
-      
-      this.apiservice.createData(userData).subscribe(res => {
-        console.log("Response from API:", res);
-        this.message = res.data 
-      },
-      error => {
-        this.message = error.error.message
-      }
-    )
+
+      this.apiservice.createData(userData).subscribe({
+        next:(res) => {
+          this.message = res.data 
+        },
+        error:(err) => {
+         const apiMessage = err.error?.message;
+
+         if(apiMessage?.includes("already registerd") || apiMessage?.includes("Duplicate")) {
+          this.message = "This email is already in use. Please try another.";
+         }
+          
+        }
+      });
     }
-   
   }
 
 }
