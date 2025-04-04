@@ -23,7 +23,19 @@ export class ApiService {
   }
 
   userLogin(userData:User):Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`,userData)
+    return this.http.post<{token:string}>(`${this.apiUrl}/login`,userData)
   }
 
+  isLoggedIn():boolean {
+    return !!localStorage.getItem('jwtToken')
+  }
+
+  getToken():string | null {
+    return localStorage.getItem('jwtToken')
+  }
+
+  logout() {
+    localStorage.removeItem('jwtToken');
+  }
+  
 }

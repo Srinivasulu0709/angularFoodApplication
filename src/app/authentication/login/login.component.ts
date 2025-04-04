@@ -33,13 +33,16 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     if(this.loginForm.valid){
-      this.apiService.userLogin(this.loginForm.value).subscribe(res => {
-        localStorage.setItem('token',res.token);
-        this.message = 'Login succesfully';
-      }, err => {
-        this.message = err.error.message || 'Login failed'
-      }
-    )
+      this.apiService.userLogin(this.loginForm.value).subscribe({
+        next:(res) => {
+          localStorage.setItem('jwtToken',res.token);
+          console.log("token",res.token)
+        },
+        error:(err) => {
+          this.message = err.error.message || 'Login Failed'
+        }
+      })
+
     }
    
   }
