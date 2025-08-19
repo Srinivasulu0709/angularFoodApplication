@@ -1,1 +1,64 @@
-<p>homepage works!</p>
+<button type="button" class="btn btn-primary m-3" (click)="logout()">Logout</button>
+
+<form [formGroup]="userDetails" (ngSubmit)="onSubmit()" class="p-3">
+    <div class="row g-3" >
+        <div class="col-lg-6 col-md-6 col-12 mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" formControlName="userName">
+        </div>
+        <div class="col-lg-6 col-md-6 col-12 mb-3">
+             <label class="form-label">RegNumber</label>
+            <input type="text" class="form-control" formControlName="regNumber">
+        </div>
+        <div class="col-lg-6 col-md-6 col-12 mb-3">
+             <label class="form-label" for="inlineFormSelectPref">State</label>
+            <select class="form-select" id="inlineFormSelectPref" formControlName="state" [disabled]="!states.length">
+
+              @for (state of states; track state.state_code) {
+                <option [value]="state.state_code">{{ state.name }}</option>
+              }
+            </select>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12 mb-3">
+             <label class="form-label" for="inlineFormSelectCountry" >Country</label>
+             <select class="form-select" id="inlineFormSelectCountry" formControlName="country" (change)="onCountryChange($event)">
+                     <option value="">Select Country</option>
+                   @for (country of countries; track country.iso3) {
+                    <option [value]="country.iso3">{{country.name}}</option>
+                }
+
+            </select>
+        </div>
+    </div>
+
+    <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>&nbsp;&nbsp;
+        <button type="button" class="btn btn-primary" (click)="resetFroms()">Cancel</button>
+    </div>
+</form>
+
+
+<table class="table"  *ngIf="tableData.length > 0">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">RegdNumber</th>
+      <th scope="col">State</th>
+      <th scope="col">country</th>
+      <th scope="col">options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let list of tableData;let i = index">
+      <td >{{list.userName}}</td>
+      <td>{{list.regNumber}}</td>
+      <td>{{list.state}}</td>
+      <td>{{list.country}}</td>
+      <td>
+        <button type="button" class="btn btn-secondary" (click)="onEdit(i)">Edit</button>&nbsp;
+        <button type="button" class="btn btn-secondary" (click)="deleteRow(i)">Delete</button>
+      </td>
+    </tr>
+  
+  </tbody>
+</table>

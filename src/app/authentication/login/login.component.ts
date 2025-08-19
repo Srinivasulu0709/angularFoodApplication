@@ -31,20 +31,18 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
     if(this.loginForm.valid){
       this.apiService.userLogin(this.loginForm.value).subscribe({
         next:(res) => {
           localStorage.setItem('jwtToken',res.token);
-          console.log("token",res.token)
+          console.log("token",res.token);
+          this.router.navigate(['/home']);
         },
         error:(err) => {
           this.message = err.error.message || 'Login Failed'
         }
       })
-
     }
-   
   }
 
 }

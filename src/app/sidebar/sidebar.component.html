@@ -1,0 +1,14 @@
+<nav [ngClass]="{'sidebar': true, 'collapsed': isCollapsed}">
+  <div class="toggle-icon" (click)="toggleSidebar()">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <ul>
+    <li *ngFor="let item of navItems" [class.active]="item.route === activeRoute">
+      <a [routerLink]="item.route">
+        <i class="{{ item.icon }}"></i>
+        <span *ngIf="!isCollapsed">{{ item.label }}</span>
+      </a>
+    </li>
+  </ul>
+</nav>
